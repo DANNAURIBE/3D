@@ -1,0 +1,189 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black'); /* Importa la fuente ICA Rubrik Black */
+@import url('https://fonts.cdnfonts.com/css/poppins'); /* Importa la fuente Poppins */
+
+
+
+/* Estilo del banner principal */
+.banner {
+    width: 100%; /* Ocupa el 100% del ancho de la ventana */
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    text-align: center; /* Centra el texto dentro del banner */
+    overflow: hidden; /* Oculta el contenido que se sale del contenedor */
+    position: relative; /* Posiciona el banner en relación a otros elementos */
+}
+
+/* Estilo del slider dentro del banner */
+.banner .slider {
+    position: absolute; /* Posición absoluta dentro del banner */
+    width: 200px; /* Ancho del slider */
+    height: 200px; /* Alto del slider */
+    top: 10%; /* Posición vertical desde la parte superior */
+    left: calc(50% - 100px); /* Centra el slider horizontalmente */
+    transform-style: preserve-3d; /* Mantiene la perspectiva 3D de los hijos */
+    transform: perspective(1000px); /* Establece la perspectiva 3D */
+    animation: autoRun 20s linear infinite; /* Anima el slider de manera continua */
+    z-index: 2; /* Asegura que esté encima de otros elementos */
+}
+
+/* Definición de la animación autoRun para el slider */
+@keyframes autoRun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg); /* Inicio de la animación */
+    }
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg); /* Fin de la animación */
+    }
+}
+
+/* Estilo de cada elemento dentro del slider */
+.banner .slider .item {
+    position: absolute; /* Posición absoluta */
+    inset: 0 0 0 0; /* Establece los márgenes en cero */
+    transform: rotateY(calc((var(--position) - 1)*(360/ var(--quantity))*1deg)) translateZ(500px); /* Aplicación de la transformación 3D */
+}
+
+/* Estilo de las imágenes dentro de los elementos del slider */
+.banner .slider .item img {
+    width: 100%; /* Ancho completo del contenedor */
+    height: 100%; /* Alto completo del contenedor */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor manteniendo su proporción */
+}
+
+/* Estilo del contenido textual dentro del banner */
+.banner .content {
+    position: absolute; /* Posición absoluta */
+    bottom: 0; /* Anclado al fondo del banner */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%); /* Ajusta la posición para centrar correctamente */
+    width: min(1400px, 100vw); /* Ancho máximo de 1400px o 100% de la ventana */
+    height: max-content; /* Alto que se ajuste al contenido */
+    padding-bottom: 100px; /* Espacio inferior */
+    display: flex; /* Usar Flexbox para el diseño */
+    flex-wrap: wrap; /* Permitir que el contenido se ajuste a múltiples líneas */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
+    z-index: 1; /* Asegura que esté debajo del slider */
+}
+
+/* Estilo del título principal */
+.banner .content h1 {
+    font-family: 'ICA Rubrik'; /* Usa la fuente ICA Rubrik */
+    font-size: 16em; /* Tamaño de fuente grande */
+    line-height: 1em; /* Altura de línea ajustada */
+    color: black; /* Color del texto */
+    position: relative; /* Posición relativa para efectos adicionales */
+}
+
+/* Efecto de texto en el título */
+.banner .content h1::after {
+    position: absolute; /* Posición absoluta */
+    inset: 0 0 0 0; /* Sin márgenes */
+    content: attr(data-content); /* Contenido del atributo data-content */
+    z-index: 2; /* Por encima del texto original */
+    -webkit-text-stroke: 2px #ffeeee; /* Contorno blanco alrededor del texto */
+    color: transparent; /* Texto interno transparente */
+}
+
+/* Estilo para el autor */
+.banner .content .author {
+    font-family: Poppins; /* Usa la fuente Poppins */
+    text-align: right; /* Alinea el texto a la derecha */
+    max-width: 200px; /* Ancho máximo */
+}
+
+/* Estilo para un subtítulo */
+.banner .content h2 {
+    font-size: 3em; /* Tamaño de fuente para el subtítulo */
+}
+
+/* Estilo de la imagen de fondo dentro del contenido */
+.banner .content .model {
+    background-image: url(images/model.png); /* Imagen de fondo */
+    width: 100%; /* Ancho completo */
+    height: 75vh; /* Altura del 75% de la ventana */
+    position: absolute; /* Posición absoluta */
+    bottom: 0; /* Anclado al fondo */
+    left: 0; /* Sin margen a la izquierda */
+    background-size: auto 130%; /* Ajuste de la imagen */
+    background-repeat: no-repeat; /* No repetir la imagen */
+    background-position: top center; /* Posiciona la imagen en la parte superior */
+    z-index: 0; /* Asegura que esté debajo de otros elementos */
+}
+
+/* Media queries para adaptar el diseño a pantallas más pequeñas */
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px; /* Ajusta el ancho del slider */
+        height: 200px; /* Ajusta la altura del slider */
+        left: calc(50% - 80px); /* Reajusta la posición */
+    }
+
+    .banner .slider .item {
+        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px); /* Ajusta la transformación 3D */
+    }
+
+    .banner .content h1 {
+        text-align: center; /* Centra el texto del título */
+        width: 100%; /* Ancho completo */
+        text-shadow: 0 10px 20px #000; /* Sombra de texto */
+        font-size: 7em; /* Ajusta el tamaño de fuente */
+    }
+
+    .banner .content .author {
+        color: #fff; /* Color blanco para el texto del autor */
+        padding: 20px; /* Espacio alrededor del texto */
+        text-shadow: 0 10px 20px #000; /* Sombra de texto */
+        z-index: 2; /* Asegura que esté encima del fondo */
+        max-width: unset; /* Sin ancho máximo */
+        width: 100%; /* Ancho completo */
+        text-align: center; /* Centra el texto */
+        padding: 0 30px; /* Ajuste de padding */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px; /* Ajusta aún más el ancho del slider */
+        height: 150px; /* Ajusta la altura del slider */
+        left: calc(50% - 50px); /* Reajusta la posición */
+    }
+
+    .banner .slider .item {
+        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px); /* Ajusta la transformación 3D */
+    }
+
+    .banner .content h1 {
+        font-size: 5em; /* Reduce el tamaño de fuente del título */
+    }
+}
+
+/* Estilos globales */
+* {
+    margin: 0; /* Elimina el margen por defecto */
+    padding: 0; /* Elimina el padding por defecto */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+/* Estilo del cuerpo de la página */
+body {
+    background-color: #D2D2D2; /* Color de fondo gris claro */
+    background-image: /* Fondo con patrones */
+        repeating-linear-gradient(to right, transparent 0 100px, #25283b22 100px 101px),
+        repeating-linear-gradient(to bottom, transparent 0 100px, #25283b22 100px 101px);
+}
+
+/* Capa adicional sobre el fondo */
+body::before {
+    position: absolute; /* Posición absoluta */
+    width: min(1400px, 90vw); /* Ancho máximo */
+    top: 10%; /* Posición vertical */
+    left: 50%; /* Centrado horizontal */
+    height: 90%; /* Altura del 90% de la ventana */
+    transform: translateX(-50%); /* Centrado */
+    content: ''; /* Contenido vacío para usar como fondo */
+    background-image: url(images/bg.png); /* Imagen de fondo */
+    background-size: 100%; /* Tamaño de imagen completo */
+    background-repeat: no-repeat; /* No repetir la imagen */
+    background-position: top center; /* Posiciona la imagen en la parte superior */
+    pointer-events: none; /* No permite interacciones con esta capa */
+}
